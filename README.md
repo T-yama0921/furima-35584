@@ -41,10 +41,6 @@
 
 | Column           | Type       | Options     |
 | ---------------- | ---------- | ----------- |
-| card_number      | integer    | null: false |
-| exp_month        | integer    | null: false |
-| exp_year         | integer    | null: false |
-| security_code    | integer    | null: false |
 | user             | references | null: false, foreign_key: true |
 | item             | references | null: false, foreign_key: true |
 
