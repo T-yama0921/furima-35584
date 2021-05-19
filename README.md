@@ -30,7 +30,7 @@
 | shipping_area_id | integer    | null: false |
 | shipping_days_id | integer    | null: false |
 | price            | integer    | null: false |
-| user_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -45,8 +45,8 @@
 | exp_month        | integer    | null: false |
 | exp_year         | integer    | null: false |
 | security_code    | integer    | null: false |
-| user_id          | references | null: false, foreign_key: true |
-| item_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -64,7 +64,7 @@
 | house_number     | string     | null: false |
 | building_name    | string     |             |
 | phone_number     | integer    | null: false |
-| purchase_id      | references | null: false, foreign_key: true |
+| purchase         | references | null: false, foreign_key: true |
 
 ### Association
 
