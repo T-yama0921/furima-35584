@@ -88,6 +88,36 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
+      it 'last_nameが半角では登録できない' do
+        @user.last_name = Faker::Name.last_name
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters.")
+      end
+      it 'first_nameが半角では登録できない' do
+        @user.first_name = Faker::Name.first_name
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters.")
+      end
+      it 'last_name_kanaが半角では登録できない' do
+        @user.last_name_kana = Faker::Name.last_name
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters.")
+      end
+      it 'first_name_kanaが半角では登録できない' do
+        @user.first_name_kana = Faker::Name.first_name
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
+      end
+      it 'last_name_kanaがカタカナではないなら登録できない' do
+        @user.last_name_kana = Gimei.last.kanji
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters.")
+      end
+      it 'first_name_kanaがカタカナではないなら登録できない' do
+        @user.first_name_kana = Gimei.first.kanji
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
+      end
     end
   end
 end
