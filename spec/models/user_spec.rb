@@ -7,8 +7,11 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できるとき' do
-      it 'nicknameとemail、passwordとpassword_confirmation、
-      苗字名前の漢字とカタカナ、生年月日が存在すれば登録できる' do
+      it 'nicknameとemail、passwordとpassword_confirmation、苗字名前の漢字とカタカナ、生年月日が存在すれば登録できる' do
+        expect(@user).to be_valid
+      end
+      it 'emailに「@」が含まれている場合登録できる' do
+        @user.email = 'aaa@com'
         expect(@user).to be_valid
       end
       it 'passwordとpassword_confirmationが英字と数字を共に含む6文字以上であれば登録できる' do
@@ -85,6 +88,11 @@ RSpec.describe User, type: :model do
         another_user.email = @user.email
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+      it 'emailに「@」が含まれない場合登録できない' do
+        @user.email = 'aaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it 'passwordが5文字以下では登録できない' do
         @user.password = '000aa'
