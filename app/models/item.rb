@@ -4,4 +4,5 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :shipping_charge
   belongs_to :shipping_area
+  belongs_to :shipping_days
 end
