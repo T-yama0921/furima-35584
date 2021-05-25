@@ -10,26 +10,6 @@ RSpec.describe Item, type: :model do
       it '全項目存在すれば登録できる' do
         expect(@item).to be_valid
       end
-      it 'category_idが0でなければ登録できる' do
-        @item.category_id = 1
-        expect(@item).to be_valid
-      end
-      it 'status_idが0でなければ登録できる' do
-        @item.status_id = 1
-        expect(@item).to be_valid
-      end
-      it 'shipping_charges_idが0でなければ登録できる' do
-        @item.shipping_charges_id = 1
-        expect(@item).to be_valid
-      end
-      it 'shipping_area_idが0でなければ登録できる' do
-        @item.shipping_area_id = 1
-        expect(@item).to be_valid
-      end
-      it 'shipping_days_idが0でなければ登録できる' do
-        @item.shipping_days_id = 1
-        expect(@item).to be_valid
-      end
       it 'priceが300以上9999999以下であれば登録できる' do
         @item.price = 300
         expect(@item).to be_valid
@@ -90,6 +70,16 @@ RSpec.describe Item, type: :model do
       end
       it 'priceが全角では登録できない' do
         @item.price = '１０００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'priceが半角英数字混合では登録できない' do
+        @item.price = '1000a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'priceが半角英語だけでは登録できない' do
+        @item.price = 'abcd'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
