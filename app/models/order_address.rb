@@ -8,7 +8,8 @@ class OrderAddress
                 :phone_number,
                 :order_id,
                 :user_id,
-                :item_id
+                :item_id,
+                :token
 
   with_options presence: true do
     validates :postal_code
@@ -18,6 +19,7 @@ class OrderAddress
     validates :phone_number
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   def save
