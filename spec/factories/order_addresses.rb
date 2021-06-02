@@ -6,8 +6,6 @@ FactoryBot.define do
     house_number     { Faker::Address.building_number }
     building_name    { Gimei.town.hiragana }
     phone_number     { Faker::Number.leading_zero_number(digits: 11) }
-    association :user
-    association :item
     token            { "tok_abcdefghijk00000000000000000" }
   end
 end
