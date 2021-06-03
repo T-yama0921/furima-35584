@@ -17,6 +17,10 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = '0123456789'
         expect(@order_address).to be_valid
       end
+      it 'building_nameが空でも購入できる' do
+        @order_address.building_name = ''
+        expect(@order_address).to be_valid
+      end
     end
     context '商品購入できないとき' do
       it 'postal_codeが空では購入できない' do
